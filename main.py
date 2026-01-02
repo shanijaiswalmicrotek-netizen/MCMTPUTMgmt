@@ -6,13 +6,12 @@ import io
 import unicodedata
 
 # ---------------- CONFIG ----------------
-GOOGLE_SHEET_FILE_ID = "1H_aN66Joy7Tuzx8NjTygOsMA1J2OUjnz"  # from your link
+GOOGLE_SHEET_FILE_ID = "1PL_quqf5o02Y-k5WfOpBlGJ_Bhf6zhYL4OmIUOt6jyY"  # from your link
 COL_STUDENT_NAME = "Student Name"
 COL_ADMISSION_NO = "Admission No."
 COL_FATHER_NAME = "Father Name"   # optional
 
 st.set_page_config(page_title="Marksheet Viewer", layout="wide")
-
 
 # ---------------- GOOGLE SHEETS LOADER ----------------
 @st.cache_data(ttl=300)  # cache for 5 minutes; adjust as needed
@@ -60,7 +59,7 @@ def to_text_one_decimal(val):
 
 
 def parse_sheet(sheetname: str):
-    """Extract university + semester from a sheet name like 'MGKVP 1'."""
+    """Extract course + semester from a sheet name like 'MGKVP 1'."""
     parts = sheetname.rsplit(" ", 1)
     if len(parts) == 2 and parts[1].isdigit():
         return parts[0], parts[1], sheetname
@@ -75,7 +74,7 @@ def main():
         pass
 
     st.markdown(
-        "<h2 style='text-align:center; font-weight:700;'>Result Sessional Odd Sem 2025</h2>",
+        "<h2 style='text-align:center; font-weight:700;'>Result Sessional 2025</h2>",
         unsafe_allow_html=True
     )
 
@@ -91,7 +90,7 @@ def main():
     universities = sorted({u for u, sem, orig in parsed})
 
     # UI: Select University
-    uni = st.selectbox("Select University", ["-- choose --"] + universities)
+    uni = st.selectbox("Select Course", ["-- choose --"] + universities)
     if uni == "-- choose --":
         return
 
@@ -152,3 +151,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
